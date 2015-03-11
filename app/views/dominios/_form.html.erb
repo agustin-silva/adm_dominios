@@ -1,0 +1,6 @@
+<%= simple_form_for(@dominio) do |f| %>
+  <%= f.input :nombre %>
+  <%= f.input :fecha_de_alta, as: :date %>
+  <%= f.input :vencimiento, as: :date %>
+  <%= f.button :submit %>
+<% end %>

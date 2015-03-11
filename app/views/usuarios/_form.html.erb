@@ -1,0 +1,6 @@
+<%= simple_form_for(@usuario) do |f| %>
+  <%= f.input :email, label: "E-mail:" %>
+  <%= f.input :password %>  
+  <%= f.input :password_confirmation, label: "Confirmar password" %>  
+  <%= f.button :submit %>
+<% end %>

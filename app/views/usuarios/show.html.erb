@@ -1,0 +1,48 @@
+<p>
+  <strong>USUARIO:</strong>
+  <%= @usuario.email %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dominio</th>
+      <th>Fecha de alta</th>
+      <th>Vencimiento</th>
+      <th>Tiene que renovar?</th>
+      <th>Se encuentra vencido?</th>
+      <th colspan="3">Acción</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @dominios.empty? %>
+      <% @dominios.each do |dominio| %>
+        <tr>
+          <td><%= link_to dominio.nombre, "http://www.#{dominio.nombre}", target: "_blank" %></td>
+          <td><%= fecha(dominio.fecha_de_alta) %></td>
+          <td><%= fecha(dominio.vencimiento) %></td>
+
+          <% if dominio.hay_que_renovar? %>
+            <td style="background-color: red"><strong style="color:white">SI</strong></td>
+          <% else %>
+            <td style="background-color: green"><strong style="color:white">NO, faltan <%= dominio.dias_restantes %> días</strong></td>
+          <% end %>
+
+          <% if dominio.esta_vencido? %>
+            <td style="background-color: red"><strong style="color:white"><strong><%= link_to "RENOVAR", "http://www.nic.ar", target: "_blank" %></strong></td></td>
+          <% else %>
+            <td style="background-color: green"><strong style="color:white">NO</strong></td>
+          <% end %>
+
+          <td><%= link_to "Editar", edit_dominio_path(dominio.id) %></td>
+          <td><%= link_to "Eliminar", dominio, method: :delete, data: { confirm: "¿Está seguro?" } %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan=3>No hay dominios registrados</td>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Registrar dominio", new_dominio_path %>

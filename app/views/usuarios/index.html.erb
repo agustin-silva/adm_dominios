@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Usuarios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Tiene dominios por vencer?</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.email %></td>
+        <td><%#= usuario. %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

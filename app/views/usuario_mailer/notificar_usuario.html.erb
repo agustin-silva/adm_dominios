@@ -1,0 +1,10 @@
+<h1>UsuarioMailer#notificar_usuario</h1>
+
+<p>
+  <%= @usuario.email %>, los siguientes dominios están por vencer:
+  <ul>
+	  <% @dominios.each do |dominio| %>
+	  	<li>dominio.nombre</li>
+	  <% end %>
+	</ul>
+</p>
