@@ -17,7 +17,6 @@ class DominiosController < ApplicationController
   end
 
   def edit
-
   end
 
   def update

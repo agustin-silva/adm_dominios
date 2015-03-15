@@ -27,43 +27,6 @@ ActiveRecord::Schema.define(version: 20150223193747) do
 
   add_index "dominios", ["usuario_id"], name: "index_dominios_on_usuario_id", using: :btree
 
-  create_table "empresas", force: :cascade do |t|
-    t.string   "nombre"
-    t.string   "logo_name"
-    t.string   "logo_uid"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "empresas", ["email"], name: "index_empresas_on_email", using: :btree
-
-  create_table "puestos", force: :cascade do |t|
-    t.string   "nombre"
-    t.string   "color"
-    t.string   "letra"
-    t.boolean  "esta_habilitado", default: true
-    t.integer  "empresa_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  create_table "tickets", force: :cascade do |t|
-    t.integer  "numero",           default: 0
-    t.string   "estado",           default: "esperando"
-    t.boolean  "es_ausente",       default: false
-    t.datetime "hora_de_emision"
-    t.datetime "hora_de_llamado"
-    t.datetime "hora_de_atencion"
-    t.datetime "hora_de_atendido"
-    t.datetime "hora_de_ausente"
-    t.integer  "puesto_id"
-    t.integer  "empresa_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",            null: false
     t.string   "crypted_password"

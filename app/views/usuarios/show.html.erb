@@ -46,3 +46,4 @@
 </table>
 
 <%= link_to "Registrar dominio", new_dominio_path %>
+<%= link_to "Notificar", notificar_usuario_path(current_user) if current_user.debe_renovar_dominios? %>

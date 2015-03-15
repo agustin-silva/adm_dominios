@@ -3,8 +3,8 @@
 <p>
   <%= @usuario.email %>, los siguientes dominios están por vencer:
   <ul>
-	  <% @dominios.each do |dominio| %>
-	  	<li>dominio.nombre</li>
+	  <% @dominios_a_vencer.each do |dominio| %>
+	  	<li><%= dominio.nombre %></li>
 	  <% end %>
 	</ul>
 </p>

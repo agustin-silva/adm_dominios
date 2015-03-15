@@ -1,66 +1,48 @@
 class UsuariosController < ApplicationController
-  before_action :set_usuario, only: [:show, :edit, :update, :destroy]
+  before_action :set_usuario, only: [:show, :edit, :update, :destroy, :notificar]
   skip_before_filter :require_login, only: [:index, :new, :create]
 
-  # GET /usuarios
-  # GET /usuarios.json
   def index
     @usuarios = Usuario.all
   end
 
-  # GET /usuarios/1
-  # GET /usuarios/1.json
   def show
     @dominios = current_user.dominios
   end
 
-  # GET /usuarios/new
   def new
     @usuario = Usuario.new
   end
 
-  # GET /usuarios/1/edit
   def edit
   end
 
-  # POST /usuarios
-  # POST /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
 
-    respond_to do |format|
-      if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
-        format.json { render :show, status: :created, location: @usuario }
-      else
-        format.html { render :new }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
-      end
+    if @usuario.save
+      redirect_to @usuario, notice: 'Usuario creado con éxito!'        
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /usuarios/1
-  # PATCH/PUT /usuarios/1.json
-  def update
-    respond_to do |format|
-      if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
-        format.json { render :show, status: :ok, location: @usuario }
-      else
-        format.html { render :edit }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
-      end
-    end
+  def update    
+    if @usuario.update(usuario_params)
+      redirect_to @usuario, notice: 'Usuario actualizado con éxito!'
+    else
+      render :edit
+    end    
   end
 
-  # DELETE /usuarios/1
-  # DELETE /usuarios/1.json
   def destroy
     @usuario.destroy
-    respond_to do |format|
-      format.html { redirect_to usuarios_url, notice: 'Usuario was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to usuarios_url, notice: 'Usuario destruido con éxito!'
+  end
+
+  def notificar
+    UsuarioMailer.dominios_por_vencer(@usuario).deliver
+    redirect_to :back
   end
 
   private

@@ -6,7 +6,7 @@ class Dominio < ActiveRecord::Base
 
   belongs_to :usuario
 
-  scope :dominios_por_vencer, -> { where(:vencimiento => (Date.today - 30.days)..Date.today) }
+  scope :dominios_por_vencer, -> { where(:vencimiento => Date.today..(Date.today + 30.days)) }
 
   def hay_que_renovar?
     (self.vencimiento - Date.today).to_i < 30 ? true : false

@@ -8,4 +8,15 @@ class Usuario < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :dominios
+
+  def debe_renovar_dominios?
+  	self.dominios.dominios_por_vencer.empty? ? false : true
+  end
+
+  private
+
+  # necesito pasar de parametro al usuario! Consultar a los chicos
+  def notificar_usuario
+  	UsuarioMailer.dominios_por_vencer.deliver
+  end  
 end
